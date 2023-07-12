@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { User, Post, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/', withAuth, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const postData = await Post.findAll({
             include: [{
@@ -20,6 +20,8 @@ router.get('/', withAuth, async (req, res) => {
         });
 
         const posts = postData.map((u) => u.get({ plain: true }));
+
+        console.log(posts);
 
         res.render('homepage', {
             posts,
@@ -48,24 +50,13 @@ router.get('/register', (req, res) => {
     res.render('register');
 });
 
-router.get('/create', (req, res) => {
-    if (!req.session.logged_in) {
-        res.redirect('/login');
-        return;
-    }
-
+router.get('/create', withAuth, (req, res) => {
     res.render('create', {
         logged_in: req.session.logged_in
     });
 });
 
-router.get('/userpage', async (req, res) => {
-
-    if (!req.session.logged_in) {
-        res.redirect('/login');
-        return;
-    };
-
+router.get('/userpage', withAuth, async (req, res) => {
     try{
         const userData = await User.findByPk(req.session.user_id, {
             include: {
@@ -82,8 +73,6 @@ router.get('/userpage', async (req, res) => {
             attributes: { exclude: ['password', 'email'] }
         });
 
-        console.log(userData.posts.map((p) => p.get({ plain: true })));
-
         res.render('userpage', {
             logged_in: req.session.logged_in,
             user: userData.get({ plain: true }),
@@ -93,8 +82,64 @@ router.get('/userpage', async (req, res) => {
         console.error(err);
         res.status(500).json(err);
     }
+});
 
-    
-})
+router.get('/post/:id', withAuth, async (req, res) => {
+    try {
+        const postData = await Post.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['username'],
+                },
+                {
+                    model: Comment,
+                    include: {
+                        model: User,
+                        attributes: ['username'],
+                    }
+                }
+            ]
+        });
+
+        res.render('postpage', {
+            logged_in: req.session.logged_in,
+            post: postData.get({ plain: true })
+        })
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+    }
+});
+
+router.get('/edit/:id', withAuth, async (req, res) => {
+    try {
+        const postData = await Post.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['username'],
+                },
+                {
+                    model: Comment,
+                    include: {
+                        model: User,
+                        attributes: ['username'],
+                    }
+                }
+            ]
+        });
+
+        console.log(postData.get({ plain: true }));
+
+        res.render('edit', {
+            logged_in: req.session.logged_in,
+            post: postData.get({ plain: true })
+        })
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+    }
+});
 
 module.exports = router;

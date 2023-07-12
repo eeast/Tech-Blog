@@ -6,7 +6,7 @@
                 <p class="small">Created {{format_date this.createdAt}} by {{this.user.username}}</p>
             </div>
             <div class="card-body text-truncate">
-                {{this.post_body}}
+                {{this.body}}
             </div>
             <div class="card-footer">
                 <span>{{num_of_comments this.comments}}</span>
@@ -22,5 +22,3 @@
         transition: all 0.3s ease;
     }
 </style>
-
-<script src=""></script>
