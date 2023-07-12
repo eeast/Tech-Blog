@@ -1,8 +1,8 @@
 {
-  "name": "ch14-tech-blog",
+  "name": "tech-blog",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
@@ -10,9 +10,10 @@
     "dev": "nodemon server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "eeast",
   "license": "ISC",
   "dependencies": {
+    "node": "18.x",
     "bcrypt": "^5.1.0",
     "bootstrap": "^4.6.2",
     "connect-session-sequelize": "^7.1.6",
