@@ -1,0 +1,51 @@
+:root {
+    --main-bg-color: rgb(80, 80, 80);
+    --bold-bg-color: rgb(50, 133, 133);
+    --soft-bg-color: rgb(70, 153, 153);
+
+    --primary-text-color: whitesmoke;
+}
+
+* {
+    font-family: Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    color: var(--primary-text-color);
+}
+
+body {
+    background-color: var(--main-bg-color);
+    color: var(--primary-text-color);
+}
+
+.navbar {
+    background-color: var(--bold-bg-color);
+}
+
+.navbar-brand,
+.page-title {
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+.navbar a {
+    color: var(--primary-text-color);
+}
+
+.navbar a:hover {
+    color:rgb(80, 80, 80)
+}
+
+.card-header,
+.card-footer {
+    background-color: var(--bold-bg-color);
+    color: var(--primary-text-color);
+}
+
+.card-body {
+    background-color: var(--soft-bg-color);
+}
+
+.form-group .form-input,
+.form-group .form-control {
+    color: black;
+    background-color: lightgray;
+}
