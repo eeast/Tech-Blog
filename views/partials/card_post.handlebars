@@ -3,7 +3,7 @@
         <div class="card text-dark shadow" id="post-link" data-id={{this.id}} data-user={{this.user.username}}>
             <div class="card-header">
                 <h3>{{this.title}}</h3>
-                <p class="small">Created {{format_date this.createdAt}} by {{this.user.username}}</p>
+                <p class="small">Created {{format_date this.createdAt}} {{#if this.user.username}}by {{this.user.username}}{{/if}}</p>
             </div>
             <div class="card-body text-truncate">
                 {{this.body}}
