@@ -13,8 +13,6 @@
   "author": "eeast",
   "license": "ISC",
   "dependencies": {
-    "node": "18.16.1",
-    "npm": "9.8.0",
     "bcrypt": "^5.1.0",
     "bootstrap": "^4.6.2",
     "connect-session-sequelize": "^7.1.6",
@@ -27,9 +25,11 @@
     "jquery": "^3.7.0",
     "moment": "^2.29.4",
     "mysql2": "^3.3.0",
+    "node": "18.16.1",
+    "npm": "9.8.0",
     "sequelize": "^6.31.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^3.0.1"
   }
 }
